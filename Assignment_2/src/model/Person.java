@@ -9,10 +9,11 @@ package model;
  * @author tawde
  */
 public class Person {
+    
     private String firstName;
     private String lastName;
-    private int ssn;
-    private String licenseNumber;
+    private long ssn;
+    private byte age;
     
     private Address workAddress;
     private Address homeAddress;
@@ -38,20 +39,20 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public int getSsn() {
+    public long getSsn() {
         return ssn;
     }
 
-    public void setSsn(int ssn) {
+    public void setSsn(long ssn) {
         this.ssn = ssn;
     }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
+    public byte getAge() {
+        return age;
     }
 
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
+    public void setAge(byte age) {
+        this.age = age;
     }
 
     public Address getWorkAddress() {
@@ -69,7 +70,8 @@ public class Person {
     public void setHomeAddress(Address homeAddress) {
         this.homeAddress = homeAddress;
     }
-    
+
+       
     @Override
     public String toString() {
         return firstName;
