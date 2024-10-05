@@ -188,6 +188,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnListPerson.setBackground(new java.awt.Color(204, 102, 0));
         btnListPerson.setForeground(new java.awt.Color(255, 255, 255));
         btnListPerson.setText("List Person");
+        btnListPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListPersonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,6 +277,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnSearchPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPersonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchPersonActionPerformed
+
+    private void btnListPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListPersonActionPerformed
+        // TODO add your handling code here:
+        ManagePersonJPanel panel = new ManagePersonJPanel(userProcessContainer, personDirectory);
+        userProcessContainer.add("ManagePersonJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnListPersonActionPerformed
 
     /**
      * @param args the command line arguments

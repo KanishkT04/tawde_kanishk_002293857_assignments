@@ -4,6 +4,7 @@
  */
 package ui;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Address;
@@ -74,6 +75,7 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         lblHomeAddress = new javax.swing.JLabel();
         btnCreateProfile = new javax.swing.JButton();
         lblWorkAddress = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 51, 102));
 
@@ -291,12 +293,23 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         lblWorkAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblWorkAddress.setText("Work Address");
 
+        btnBack.setBackground(new java.awt.Color(204, 102, 0));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("<<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 218, Short.MAX_VALUE)
+                .addGap(0, 133, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,7 +340,9 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblHeader)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeader)
+                    .addComponent(btnBack))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFirstName)
@@ -492,10 +507,18 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         txtHomePhoneNumber.setText("");
     }//GEN-LAST:event_btnCreateProfileActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomeAddress;
     private javax.swing.JPanel WorkAddress;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateProfile;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblFirstName;

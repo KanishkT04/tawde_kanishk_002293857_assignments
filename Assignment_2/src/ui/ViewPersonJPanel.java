@@ -4,19 +4,62 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.Address;
+import model.Person;
+
 /**
  *
  * @author tawde
  */
 public class ViewPersonJPanel extends javax.swing.JPanel {
+    private JPanel userProcessContainer;
+    private Person person;
+    private Address workAddress;
+    private Address homeAddress;
 
     /**
      * Creates new form ViewPersonJPanel
      */
-    public ViewPersonJPanel() {
+    public ViewPersonJPanel(JPanel userProcessContainer, Person person, Address workAddress, Address homeAddress) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.person = person;
+        this.workAddress = workAddress;
+        this.homeAddress = homeAddress;
+        populateAccountDetails();
+        
+        
+        
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
     }
-
+    
+    private void populateAccountDetails() {
+        txtFirstName.setText(person.getFirstName());
+        txtLastName.setText(person.getLastName());
+        txtSSN.setText(Long.toString(person.getSsn()));
+        txtAge.setText(Byte.toString(person.getAge()));
+        
+        txtWorkStreetAddress.setText(workAddress.getStreetAddress());
+        txtWorkUnitNumber.setText(workAddress.getUnitNumber());
+        txtWorkCity2.setText(workAddress.getCity());
+        txtWorkState2.setText(workAddress.getState());
+        txtWorkZipCode.setText(Integer.toString(workAddress.getZipCode()));
+        txtWorkPhoneNumber.setText(Integer.toString(workAddress.getPhoneNumber()));
+        
+        txtHomeStreetAddress.setText(homeAddress.getStreetAddress());
+        txtHomeUnitNumber.setText(homeAddress.getUnitNumber());
+        txtHomeCity.setText(homeAddress.getCity());
+        txtHomeState.setText(homeAddress.getState());
+        txtHomeZipCode.setText(Integer.toString(homeAddress.getZipCode()));
+        txtHomePhoneNumber.setText(Integer.toString(homeAddress.getPhoneNumber()));
+        
+       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +109,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         lblWorkAddress = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -292,12 +336,23 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(204, 102, 0));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
+        btnBack.setText("<<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 218, Short.MAX_VALUE)
+                .addGap(0, 121, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,7 +377,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSave))
                             .addComponent(HomeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblHomeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
+                            .addComponent(lblHomeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(lblWorkAddress, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(150, 150, 150))
         );
@@ -330,7 +385,9 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblHeader)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeader)
+                    .addComponent(btnBack))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFirstName)
@@ -369,18 +426,18 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
             .addGap(0, 903, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 762, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -410,16 +467,151 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        txtFirstName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtSSN.setEnabled(true);
+        txtAge.setEnabled(true);
+        
+        txtWorkStreetAddress.setEnabled(true);
+        txtWorkUnitNumber.setEnabled(true);
+        txtWorkCity2.setEnabled(true);
+        txtWorkState2.setEnabled(true);
+        txtWorkZipCode.setEnabled(true);
+        txtWorkPhoneNumber.setEnabled(true);
+        
+        txtHomeStreetAddress.setEnabled(true);
+        txtHomeUnitNumber.setEnabled(true);
+        txtHomeCity.setEnabled(true);
+        txtHomeState.setEnabled(true);
+        txtHomeZipCode.setEnabled(true);
+        txtHomePhoneNumber.setEnabled(true);
+        
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String ssnString = txtSSN.getText();
+        String ageString = txtAge.getText();
+        
+        String workStreetAddress = txtWorkStreetAddress.getText();
+        String workUnitNumber = txtWorkUnitNumber.getText();
+        String workCity = txtWorkCity2.getText();
+        String workState = txtWorkState2.getText();
+        String workZipCodeString = txtWorkZipCode.getText();
+        String workPhoneNumberString = txtWorkPhoneNumber.getText();
+        
+        String homeStreetAddress = txtHomeStreetAddress.getText();
+        String homeUnitNumber = txtHomeUnitNumber.getText();
+        String homeCity = txtHomeCity.getText();
+        String homeState = txtHomeState.getText();
+        String homeZipCodeString = txtHomeZipCode.getText();
+        String homePhoneNumberString = txtHomePhoneNumber.getText();
+        
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+            try {
+                long ssn = Long.parseLong(ssnString);
+                person.setSsn(ssn);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid SSN. Please enter a valid number.");
+                return;
+            }
+
+            try {
+                byte age = Byte.parseByte(ageString);
+                person.setAge(age);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid age. Please enter a valid number.");
+                return; 
+            }
+            
+        workAddress.setStreetAddress(workStreetAddress);
+        workAddress.setUnitNumber(workUnitNumber);
+        workAddress.setCity(workCity);
+        workAddress.setState(workState);
+            try {
+                int workZipCode = Integer.parseInt(workZipCodeString);
+                workAddress.setZipCode(workZipCode);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid work zip code. Please enter a valid number.");
+                return;
+            }
+
+            try {
+                int workPhoneNumber = Integer.parseInt(workPhoneNumberString);
+                workAddress.setPhoneNumber(workPhoneNumber);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid work phone number. Please enter a valid number.");
+                return; 
+            }
+            
+        homeAddress.setStreetAddress(homeStreetAddress);
+        homeAddress.setUnitNumber(homeUnitNumber);
+        homeAddress.setCity(homeCity);
+        homeAddress.setState(homeState);
+            try {
+                int homeZipCode = Integer.parseInt(homeZipCodeString);
+                homeAddress.setZipCode(homeZipCode);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid home zip code. Please enter a valid number.");
+                return;
+            }
+
+            try {
+                int homePhoneNumber = Integer.parseInt(homePhoneNumberString);
+                homeAddress.setPhoneNumber(homePhoneNumber);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid home phone number. Please enter a valid number.");
+                return; 
+            }
+        
+        txtFirstName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtSSN.setEnabled(false);
+        txtAge.setEnabled(false);
+        
+        txtWorkStreetAddress.setEnabled(false);
+        txtWorkUnitNumber.setEnabled(false);
+        txtWorkCity2.setEnabled(false);
+        txtWorkState2.setEnabled(false);
+        txtWorkZipCode.setEnabled(false);
+        txtWorkPhoneNumber.setEnabled(false);
+
+        txtHomeStreetAddress.setEnabled(false);
+        txtHomeUnitNumber.setEnabled(false);
+        txtHomeCity.setEnabled(false);
+        txtHomeState.setEnabled(false);
+        txtHomeZipCode.setEnabled(false);
+        txtHomePhoneNumber.setEnabled(false);
+            
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        
+        JOptionPane.showMessageDialog(null, "Account updated successfully!");
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        
+        Component[] panelStack = userProcessContainer.getComponents();
+        JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
+        ManagePersonJPanel managePersonJPanel = (ManagePersonJPanel) lastPanel;
+        managePersonJPanel.populateTable();
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomeAddress;
     private javax.swing.JPanel WorkAddress;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel jPanel1;
