@@ -5,6 +5,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import model.Address;
 import model.Person;
 import model.PersonDirectory;
@@ -210,6 +212,19 @@ public class MainJFrame extends javax.swing.JFrame {
 
         txtSearchInput.setForeground(new java.awt.Color(102, 102, 102));
         txtSearchInput.setText("Type name or street address");
+        txtSearchInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchInputFocusLost(evt);
+            }
+        });
+        txtSearchInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchInputActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout topJPanelLayout = new javax.swing.GroupLayout(topJPanel);
         topJPanel.setLayout(topJPanelLayout);
@@ -224,7 +239,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(btnAddPerson, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(topJPanelLayout.createSequentialGroup()
-                .addComponent(txtSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         topJPanelLayout.setVerticalGroup(
@@ -276,6 +291,25 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnSearchPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPersonActionPerformed
         // TODO add your handling code here:
+        Person result = personDirectory.searchPerson(txtSearchInput.getText());
+        
+        if("".equals(txtSearchInput.getText())) {
+            JOptionPane.showMessageDialog(null, "Please enter a first name/last name or street address!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            if(result == null) {
+                JOptionPane.showMessageDialog(null, "Person does not exist!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                Address workResult = result.getWorkAddress();
+                Address homeResult = result.getHomeAddress();
+        
+                ViewPersonJPanel panel = new ViewPersonJPanel(userProcessContainer, result, workResult, homeResult);
+                userProcessContainer.add("ViewPersonJPanel", panel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+            }
+        }
     }//GEN-LAST:event_btnSearchPersonActionPerformed
 
     private void btnListPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListPersonActionPerformed
@@ -285,6 +319,29 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnListPersonActionPerformed
+
+    private void txtSearchInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchInputFocusGained
+        // TODO add your handling code here:
+        if(txtSearchInput.getText().equalsIgnoreCase("Type name or street address"))
+        {
+            txtSearchInput.setText("");
+            txtSearchInput.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtSearchInputFocusGained
+
+    private void txtSearchInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchInputFocusLost
+        // TODO add your handling code here:
+        if(txtSearchInput.getText().equalsIgnoreCase(""))
+        {
+            txtSearchInput.setText("Type name or street address");
+            txtSearchInput.setForeground(new Color(0,0,0));
+        }
+
+    }//GEN-LAST:event_txtSearchInputFocusLost
+
+    private void txtSearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchInputActionPerformed
 
     /**
      * @param args the command line arguments
