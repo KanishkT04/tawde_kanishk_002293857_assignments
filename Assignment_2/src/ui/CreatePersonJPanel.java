@@ -418,49 +418,81 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         String homeZipCodeString = txtHomeZipCode.getText();
         String homePhoneNumberString = txtHomePhoneNumber.getText();
         
+        if ("".equals(firstName) || "".equals(lastName) || "".equals(ageString) || "".equals(ssnString)
+                || "".equals(workStreetAddress) || "".equals(workUnitNumber) || "".equals(workCity) || "".equals(workState) || "".equals(workZipCodeString) || "".equals(workPhoneNumberString) 
+                || "".equals(homeStreetAddress) || "".equals(homeUnitNumber) || "".equals(homeCity) || "".equals(homeState) || "".equals(homeZipCodeString) || "".equals(homePhoneNumberString))  {
+            JOptionPane.showMessageDialog(null, "Please enter all the details!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+            
+        long ssn;
+        try {
+            ssn = Long.parseLong(ssnString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid SSN. Please enter a valid number.");
+            return;
+        }
+
+        byte age;
+        try {
+            age = Byte.parseByte(ageString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid age. Please enter a valid number.");
+            return;
+        }
+        
+    // Try to parse and validate work zip code
+        int workZipCode;
+        try {
+            workZipCode = Integer.parseInt(workZipCodeString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid work zip code. Please enter a valid number.");
+            return;
+        }
+
+        // Try to parse and validate work phone number
+        int workPhoneNumber;
+        try {
+            workPhoneNumber = Integer.parseInt(workPhoneNumberString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid work phone number. Please enter a valid number.");
+            return;
+        }
+
+        // Try to parse and validate home zip code
+        int homeZipCode;
+        try {
+            homeZipCode = Integer.parseInt(homeZipCodeString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid home zip code. Please enter a valid number.");
+            return;
+        }
+
+        // Try to parse and validate home phone number
+        int homePhoneNumber;
+        try {
+            homePhoneNumber = Integer.parseInt(homePhoneNumberString);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid home phone number. Please enter a valid number.");
+            return;
+        }
+        
         Person person = personDirectory.addPerson();
         person.setFirstName(firstName);
         person.setLastName(lastName);
-            try {
-                long ssn = Long.parseLong(ssnString);
-                person.setSsn(ssn);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid SSN. Please enter a valid number.");
-                return;
-            }
+        person.setSsn(ssn);
+        person.setAge(age);
 
-            try {
-                byte age = Byte.parseByte(ageString);
-                person.setAge(age);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid age. Please enter a valid number.");
-                return; 
-            }
-        
-            
-            
             
         Address workAddress = new Address();
         workAddress.setStreetAddress(workStreetAddress);
         workAddress.setUnitNumber(workUnitNumber);
         workAddress.setCity(workCity);
         workAddress.setState(workState);
-            try {
-                int workZipCode = Integer.parseInt(workZipCodeString);
-                workAddress.setZipCode(workZipCode);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid work zip code. Please enter a valid number.");
-                return;
-            }
-
-            try {
-                int workPhoneNumber = Integer.parseInt(workPhoneNumberString);
-                workAddress.setPhoneNumber(workPhoneNumber);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid work phone number. Please enter a valid number.");
-                return; 
-            }
+        workAddress.setZipCode(workZipCode);
+        workAddress.setPhoneNumber(workPhoneNumber);
         person.setWorkAddress(workAddress);
+        
         
         
         Address homeAddress = new Address();
@@ -468,21 +500,9 @@ public class CreatePersonJPanel extends javax.swing.JPanel {
         homeAddress.setUnitNumber(homeUnitNumber);
         homeAddress.setCity(homeCity);
         homeAddress.setState(homeState);
-            try {
-                int homeZipCode = Integer.parseInt(homeZipCodeString);
-                homeAddress.setZipCode(homeZipCode);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid home zip code. Please enter a valid number.");
-                return;
-            }
+        homeAddress.setZipCode(homeZipCode);
+        homeAddress.setPhoneNumber(homePhoneNumber);
 
-            try {
-                int homePhoneNumber = Integer.parseInt(homePhoneNumberString);
-                homeAddress.setPhoneNumber(homePhoneNumber);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid home phone number. Please enter a valid number.");
-                return; 
-            }
         person.setHomeAddress(homeAddress);
         
         JOptionPane.showMessageDialog(null, "Person successfully created");
