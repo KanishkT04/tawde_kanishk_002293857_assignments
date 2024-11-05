@@ -37,19 +37,26 @@ public class Info5001UniversityExample {
         // Course Catalog Management
         CourseCatalog courseCatalog = department.getCourseCatalog();
         Course coreCourse = courseCatalog.newCourse("Application Engineering", "INFO5100", 4);
-        Course elective1 = courseCatalog.newCourse("Web Design", "INFO6200", 4);
+        Course elective1 = courseCatalog.newCourse("Web Design", "INFO5200", 4);
+        Course elective2 = courseCatalog.newCourse("Machine Learning", "INFO5300", 4);
+        Course elective3 = courseCatalog.newCourse("Cybersecurity", "INFO5400", 4);
+        Course elective4 = courseCatalog.newCourse("Cloud Computing", "INFO5500", 4);
+        Course elective5 = courseCatalog.newCourse("Data Visualization", "INFO5600", 4);
 
         // Faculty Directory Management
         FacultyDirectory facultyDirectory = department.getFacultyDirectory();
-        FacultyProfile faculty1 = facultyDirectory.newFacultyProfile(new Person("Prof. Ruben Almorim"));
+        FacultyProfile faculty1 = facultyDirectory.newFacultyProfile(new Person("Prof. Ruben Amorim"));
         FacultyProfile faculty2 = facultyDirectory.newFacultyProfile(new Person("Prof. Carlo Ancelotti"));
+        FacultyProfile faculty3 = facultyDirectory.newFacultyProfile(new Person("Prof. Jurgen Klopp"));
+        FacultyProfile faculty4 = facultyDirectory.newFacultyProfile(new Person("Prof. Mikel Arteta"));
+        FacultyProfile faculty5 = facultyDirectory.newFacultyProfile(new Person("Prof. Xavi Hernandez"));
 
         // Course Schedule Management for Fall 2023 Semester
-        CourseSchedule courseSchedule = department.newCourseSchedule("Fall2023");
-        createCourseOffers(courseSchedule, coreCourse, elective1, faculty1, faculty2);
+        CourseSchedule courseSchedule = department.newCourseSchedule("Fall2024");
+        createCourseOffers(courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5, faculty1, faculty2, faculty3, faculty4, faculty5);
 
         // Student Directory and Registration
-        Map<String, StudentProfile> students = registerStudents(department, courseSchedule, coreCourse, elective1);
+        Map<String, StudentProfile> students = registerStudents(department, courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5);
 
         // Set Faculty Ratings
         setFacultyRatings(courseSchedule);
@@ -62,9 +69,9 @@ public class Info5001UniversityExample {
         System.out.println("Total Department Revenue for Fall 2023: $" + totalRevenue);
     }
 
- private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse,
-                                        Course elective1, FacultyProfile faculty1,
-                                        FacultyProfile faculty2) {
+ private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse, Course elective1,
+            Course elective2, Course elective3, Course elective4, Course elective5, FacultyProfile faculty1,
+            FacultyProfile faculty2, FacultyProfile faculty3, FacultyProfile faculty4, FacultyProfile faculty5) {
     // Create course offers and assign faculty members
     CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
     offerCore.AssignAsTeacher(faculty1);
@@ -79,8 +86,8 @@ public class Info5001UniversityExample {
     courseSchedule.addCourseOffer(offerElective1);
 }
  
-    private static Map<String, StudentProfile> registerStudents(Department department, CourseSchedule courseSchedule, 
-                                                            Course coreCourse, Course elective1) {
+    private static Map<String, StudentProfile> registerStudents(Department department, CourseSchedule courseSchedule,
+            Course coreCourse, Course elective1, Course elective2, Course elective3, Course elective4, Course elective5) {
     PersonDirectory personDirectory = department.getPersonDirectory();
     StudentDirectory studentDirectory = department.getStudentDirectory();
     Map<String, StudentProfile> students = new HashMap<>();
