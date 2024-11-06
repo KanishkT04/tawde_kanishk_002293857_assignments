@@ -113,16 +113,20 @@ public class Info5001UniversityExample {
     Map<String, StudentProfile> students = new HashMap<>();
 
     for (int i = 1; i <= 10; i++) {
-        Person person = personDirectory.newPerson("01123" + i);
+        Person person = personDirectory.newPerson("01111" + i);
         StudentProfile student = studentDirectory.newStudentProfile(person);
         students.put("Student" + i, student);
 
         // Course load for Fall 2023 semester
-        CourseLoad courseLoad = student.newCourseLoad("Fall2023");
+        CourseLoad courseLoad = student.newCourseLoad("Fall2024");
         
         // Use the correct method to get course offers by number
-        courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(coreCourse.getCOurseNumber()));
-        courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective1.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(coreCourse.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective1.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective2.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective3.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective4.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective5.getCOurseNumber()));
     }
     return students;
 }
@@ -143,7 +147,7 @@ public class Info5001UniversityExample {
     if (courseOffers.length > 1 && courseOffers[1].getFacultyProfile() != null) {
         FacultyAssignment assignment2 = courseOffers[1].getFacultyProfile().getFacultyAssignment();
         if (assignment2 != null) {
-            assignment2.setProfRating(3.8); // For elective course
+            assignment2.setProfRating(3.8); // For elective courses
         }
     } else {
         System.out.println("Not enough course offers available.");
@@ -151,12 +155,12 @@ public class Info5001UniversityExample {
 }
 
     private static void generateSemesterReport(Map<String, StudentProfile> students, CourseSchedule courseSchedule) {
-        System.out.println("=== Fall 2023 Semester Report ===");
+        System.out.println("=== Fall 2024 Semester Report ===");
 
         for (StudentProfile student : students.values()) {
             System.out.println("Student ID: " + student.getPerson().getPersonId());
             System.out.println("Courses Registered:");
-            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2023");
+            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2024");
             double totalCredits = 0.0;
             double totalGradePoints = 0.0;
 
