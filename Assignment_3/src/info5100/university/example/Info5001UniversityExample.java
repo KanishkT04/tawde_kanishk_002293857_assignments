@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//all the packages and import statements
 package info5100.university.example;
 
 import info5100.university.example.CourseCatalog.Course;
@@ -50,10 +51,11 @@ public class Info5001UniversityExample {
         FacultyProfile faculty3 = facultyDirectory.newFacultyProfile(new Person("Prof. Jurgen Klopp"));
         FacultyProfile faculty4 = facultyDirectory.newFacultyProfile(new Person("Prof. Mikel Arteta"));
         FacultyProfile faculty5 = facultyDirectory.newFacultyProfile(new Person("Prof. Xavi Hernandez"));
+        FacultyProfile faculty6 = facultyDirectory.newFacultyProfile(new Person("Prof. Hansi Flick"));
 
         // Course Schedule Management for Fall 2023 Semester
         CourseSchedule courseSchedule = department.newCourseSchedule("Fall2024");
-        createCourseOffers(courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5, faculty1, faculty2, faculty3, faculty4, faculty5);
+        createCourseOffers(courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5, faculty1, faculty2, faculty3, faculty4, faculty5, faculty6);
 
         // Student Directory and Registration
         Map<String, StudentProfile> students = registerStudents(department, courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5);
@@ -71,7 +73,7 @@ public class Info5001UniversityExample {
 
  private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse, Course elective1,
             Course elective2, Course elective3, Course elective4, Course elective5, FacultyProfile faculty1,
-            FacultyProfile faculty2, FacultyProfile faculty3, FacultyProfile faculty4, FacultyProfile faculty5) {
+            FacultyProfile faculty2, FacultyProfile faculty3, FacultyProfile faculty4, FacultyProfile faculty5, FacultyProfile faculty6) {
     // Create course offers and assign faculty members
         CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
         offerCore.AssignAsTeacher(faculty1);
@@ -94,7 +96,7 @@ public class Info5001UniversityExample {
         offerElective4.generatSeats(10);
 
         CourseOffer offerElective5 = courseSchedule.newCourseOffer(elective5.getCOurseNumber());
-        offerElective5.AssignAsTeacher(faculty1);
+        offerElective5.AssignAsTeacher(faculty6);
         offerElective5.generatSeats(10);
 
     // Assuming you need to keep a list of course offers in CourseSchedule
