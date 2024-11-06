@@ -65,25 +65,45 @@ public class Info5001UniversityExample {
         generateSemesterReport(students, courseSchedule);
 
         // Calculate and display total department revenue
-        int totalRevenue = department.calculateRevenuesBySemester("Fall2023");
-        System.out.println("Total Department Revenue for Fall 2023: $" + totalRevenue);
+        int totalRevenue = department.calculateRevenuesBySemester("Fall2024");
+        System.out.println("Total Department Revenue for Fall 2024: $" + totalRevenue);
     }
 
  private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse, Course elective1,
             Course elective2, Course elective3, Course elective4, Course elective5, FacultyProfile faculty1,
             FacultyProfile faculty2, FacultyProfile faculty3, FacultyProfile faculty4, FacultyProfile faculty5) {
     // Create course offers and assign faculty members
-    CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
-    offerCore.AssignAsTeacher(faculty1);
-    offerCore.generatSeats(10); // Generate 10 seats for the core course
+        CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
+        offerCore.AssignAsTeacher(faculty1);
+        offerCore.generatSeats(10);
 
-    CourseOffer offerElective1 = courseSchedule.newCourseOffer(elective1.getCOurseNumber());
-    offerElective1.AssignAsTeacher(faculty2);
-    offerElective1.generatSeats(10); // Generate 10 seats for the elective course
+        CourseOffer offerElective1 = courseSchedule.newCourseOffer(elective1.getCOurseNumber());
+        offerElective1.AssignAsTeacher(faculty2);
+        offerElective1.generatSeats(10);
+
+        CourseOffer offerElective2 = courseSchedule.newCourseOffer(elective2.getCOurseNumber());
+        offerElective2.AssignAsTeacher(faculty3);
+        offerElective2.generatSeats(10);
+
+        CourseOffer offerElective3 = courseSchedule.newCourseOffer(elective3.getCOurseNumber());
+        offerElective3.AssignAsTeacher(faculty4);
+        offerElective3.generatSeats(10);
+
+        CourseOffer offerElective4 = courseSchedule.newCourseOffer(elective4.getCOurseNumber());
+        offerElective4.AssignAsTeacher(faculty5);
+        offerElective4.generatSeats(10);
+
+        CourseOffer offerElective5 = courseSchedule.newCourseOffer(elective5.getCOurseNumber());
+        offerElective5.AssignAsTeacher(faculty1);
+        offerElective5.generatSeats(10);
 
     // Assuming you need to keep a list of course offers in CourseSchedule
-    courseSchedule.addCourseOffer(offerCore);
-    courseSchedule.addCourseOffer(offerElective1);
+        courseSchedule.addCourseOffer(offerCore);
+        courseSchedule.addCourseOffer(offerElective1);
+        courseSchedule.addCourseOffer(offerElective2);
+        courseSchedule.addCourseOffer(offerElective3);
+        courseSchedule.addCourseOffer(offerElective4);
+        courseSchedule.addCourseOffer(offerElective5);
 }
  
     private static Map<String, StudentProfile> registerStudents(Department department, CourseSchedule courseSchedule,
